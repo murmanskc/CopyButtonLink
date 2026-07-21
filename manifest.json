@@ -1,6 +1,6 @@
 {
   "name": "Copy Button Link",
-  "description": "Long press message buttons to copy their link to the clipboard.",
+  "description": "Long press embed buttons to copy their URL.",
   "authors": [
     {
       "name": "murmanskc",
@@ -8,5 +8,6 @@
     }
   ],
   "main": "index.js",
+  "hash": "bd7630739c94892c90e66cff44e5eef73c98305c4864cffbc0bc24ec2ee80f08",
   "version": "1.0.0"
 }
