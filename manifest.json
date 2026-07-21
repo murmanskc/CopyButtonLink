@@ -1,6 +1,6 @@
 {
   "name": "Copy Button Link",
-  "description": "Long press message buttons (like Visit Profile) to copy their link to the clipboard.",
+  "description": "Long press message buttons to copy their link to the clipboard.",
   "authors": [
     {
       "name": "User",
