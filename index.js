@@ -1,41 +1,39 @@
-(() => {
-  const v = window.vendetta || window.bunny || {};
-  const patcher = v.patcher;
-  const metro = v.metro;
-  const showToast = v.ui?.toasts?.showToast || console.log;
-  const clipboard = v.metro?.common?.clipboard;
+var CopyButtonLink = (function () {
+  'use strict';
 
-  let unpatches = [];
+  var patcher = vendetta.patcher;
+  var metro = vendetta.metro;
+  var toasts = vendetta.ui.toasts;
+  var common = vendetta.metro.common;
+
+  var unpatches = [];
 
   return {
-    onLoad: () => {
-      if (!metro || !patcher) {
-        showToast("Error: Mod APIs not accessible.");
-        return;
-      }
-
-      const ButtonModule = metro.findByProps("Button", "ButtonColors") || metro.findByName("Button");
+    onLoad: function () {
+      var ButtonModule = metro.findByProps("Button", "ButtonColors") || metro.findByName("Button");
 
       if (!ButtonModule) {
-        showToast("Copy Button Link: Button component not found.");
+        if (toasts && toasts.showToast) toasts.showToast("Copy Button Link: Component not found");
         return;
       }
 
-      const unpatch = patcher.after("default", ButtonModule, (args, res) => {
-        const props = args[0];
-        const targetUrl = props?.url || props?.component?.url;
+      var unpatch = patcher.after("default", ButtonModule, function (args, res) {
+        var props = args[0];
+        var targetUrl = props && (props.url || (props.component && props.component.url));
 
-        if (targetUrl && res?.props) {
-          const originalLongPress = res.props.onLongPress;
+        if (targetUrl && res && res.props) {
+          var originalLongPress = res.props.onLongPress;
 
-          res.props.onLongPress = (e) => {
+          res.props.onLongPress = function (e) {
             if (typeof originalLongPress === "function") {
               originalLongPress(e);
             }
-            if (clipboard?.setString) {
-              clipboard.setString(targetUrl);
+            if (common && common.clipboard && common.clipboard.setString) {
+              common.clipboard.setString(targetUrl);
             }
-            showToast("Copied button link!");
+            if (toasts && toasts.showToast) {
+              toasts.showToast("Copied button link!");
+            }
           };
         }
       });
@@ -43,9 +41,9 @@
       unpatches.push(unpatch);
     },
 
-    onUnload: () => {
-      for (const unpatch of unpatches) {
-        if (typeof unpatch === "function") unpatch();
+    onUnload: function () {
+      for (var i = 0; i < unpatches.length; i++) {
+        if (typeof unpatches[i] === "function") unpatches[i]();
       }
       unpatches = [];
     }
