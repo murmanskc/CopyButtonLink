@@ -1,0 +1,12 @@
+{
+  "name": "Copy Button Link",
+  "description": "Long press message buttons (like Visit Profile) to copy their link to the clipboard.",
+  "authors": [
+    {
+      "name": "User",
+      "id": "0"
+    }
+  ],
+  "main": "index.tsx",
+  "version": "1.0.0"
+}
