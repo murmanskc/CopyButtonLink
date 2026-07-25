@@ -1,6 +1,6 @@
 {
   "name": "Copy Button Link",
-  "description": "Long press embed buttons to copy their URL.",
+  "description": "Long press embed buttons to copy their link.",
   "authors": [
     {
       "name": "murmanskc",
@@ -8,6 +8,5 @@
     }
   ],
   "main": "index.js",
-  "hash": "bd7630739c94892c90e66cff44e5eef73c98305c4864cffbc0bc24ec2ee80f08",
   "version": "1.0.0"
 }
